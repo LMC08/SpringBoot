@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
 
-import org.springframework.stereotype.Controller;
+import com.example.demo.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -14,8 +15,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
-    @RequestMapping("/")
-    public String hello(){
-        return "hello world";
+    // 获取.yml 文件中值
+    @Value("${name}")
+    private String name;
+
+    // 获取 age
+    @Value("${age}")
+    private int age;
+
+    @Autowired
+    private User user;
+
+    @RequestMapping("/hello")
+    public String hello() {
+        return name + ":" + age;
+    }
+
+    @RequestMapping("/getUser")
+    public String getUser() {
+        return user.getBigName()+":"+user.getAge();
     }
 }
