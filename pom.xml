@@ -93,8 +93,13 @@
             <scope>provided</scope>
         </dependency>
 
-       
-
+        <!-- 生成pdf  20200304  start       -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.4.2</version>
+        </dependency>
+        <!-- 生成pdf  20200304  end       -->
 
     </dependencies>
 
