@@ -21,18 +21,20 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @Date:Create： 2021/3/4 16:02
  */
 public class CreatePdfTest {
-
-    public static void main(String[] args) {
+    public static String getPdfPath(){
         System.out.println("===========start=============");
+        String outPath = "C:/Users/lmc08/Desktop/pdfDemo-master/简历1.pdf";
         try {
-            Document doc = createPdf("C:/Users/lmc08/Desktop/pdfDemo-master/简历1.pdf");
+            Document doc = createPdf(outPath);
             //生成  合同文件
             createFile(doc);
             doc.close();
         } catch (Exception e) {
             e.printStackTrace();
+            outPath = null;
         }
         System.out.println("===========end=============");
+        return  outPath;
     }
 
     /**
@@ -69,85 +71,72 @@ public class CreatePdfTest {
         Paragraph text05 = PdfFontUtils.getFont(5, "《根据中华人民共和国合同法》的有关规定，经甲、乙双方友好协商，本着长期平等合作.....吧啦吧啦吧啦吧啦吧啦吧啦吧啦吧啦");
         doc.add(text05);
 
-        //一、合作方式及条件
-        doc.add(PdfFontUtils.getFont(2, "一、合作方式及条件"));
-        doc.add(PdfFontUtils.getFont(5, "1.双方根据国家法律规定建立合作关系，双方严格遵守和执行国家各项方针政策和有关法律、法规和条例规定。 "));
-        doc.add(PdfFontUtils.getFont(5, "2.双方严格按照《中华人民共和国招标投标法》及相关规定实施合作。 "));
-        doc.add(PdfFontUtils.getFont(5, "3.双方本着密切配合、分工协作、保证质量、按期完成的原则，共同做好工作。 "));
-
-        //二、权利义务
-        doc.add(PdfFontUtils.getFont(2, "二、权利义务"));
-        doc.add(PdfFontUtils.getFont(5, "1.双方根据国家法律规定建立合作关系，双方严格遵守和执行国家各项方针政策和有关法律、法规和条例规定。 "));
-        doc.add(PdfFontUtils.getFont(5, "2.双方严格按照《中华人民共和国招标投标法》及相关规定实施合作。 "));
-        doc.add(PdfFontUtils.getFont(5, "3.双方本着密切配合、分工协作、保证质量、按期完成的原则，共同做好工作。 "));
-
         //三、其他
-        doc.add(PdfFontUtils.getFont(2, "三、其他"));
         doc.add(PdfFontUtils.getFont(5, "1.双方根据国家法律规定建立合作关系，双方严格遵守和执行国家各项方针政策和有关法律、法规和条例规定。 "));
         doc.add(PdfFontUtils.getFont(5, "2.双方严格按照《中华人民共和国招标投标法》及相关规定实施合作。 "));
         doc.add(PdfFontUtils.getFont(5, "3.自定义 "));
 
-        PdfPTable table = new PdfPTable(2);
-        table.getDefaultCell().setBorder(PdfPCell.NO_BORDER);
+        PdfPTable table = new PdfPTable(3);
+        table.getDefaultCell().setBorder(1);
         PdfPCell cell;
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "甲方：（盖章）")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "乙方：（盖章）")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "法定代表人或负责人签章")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "法定代表人或负责人签章")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "地址：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "地址：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "开户银行：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "开户银行：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "邮编：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "邮编：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "授权代理人：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "项目经理：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "电话：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         cell.setBorder(Rectangle.NO_BORDER);
         cell = new PdfPCell(new Phrase(PdfFontUtils.getFont(5, "电话：")));
         cell.setColspan(1);
-        cell.setBorder(0);
+        //cell.setBorder(0);
         table.addCell(cell);
         doc.add(table);
-    }
 
+    }
 }

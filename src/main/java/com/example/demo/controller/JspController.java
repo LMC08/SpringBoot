@@ -1,11 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.pdf.CreatePdfTest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.Date;
 import java.util.Map;
 
@@ -63,6 +67,58 @@ public class JspController {
         model.addAttribute("content", hello + "（第二种）");
         return "page1";
     }
+
+    @RequestMapping("/downloadpage")
+    public String downloadpage() {
+        return "download";
+    }
+
+    /**
+     * 下载文件
+     */
+    @RequestMapping(value = "/download")
+    public void download(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        String path = CreatePdfTest.getPdfPath();
+        if (path != null) {
+            File excelFile = new File(path);
+            res.setCharacterEncoding("UTF-8");
+            String realFileName = excelFile.getName();
+            res.setHeader("content-type", "application/octet-stream");
+            res.setContentType("application/octet-stream;charset=UTF-8");
+            //加上设置大小下载下来的.xlsx文件打开时才不会报“Excel 已完成文件级验证和修复。此工作簿的某些部分可能已被修复或丢弃”
+//            res.addHeader("Content-Length", String.valueOf(excelFile.length()));
+            try {
+                res.setHeader("Content-Disposition", "attachment;filename=" + java.net.URLEncoder.encode(realFileName.trim(), "UTF-8"));
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            }
+            byte[] buff = new byte[1024];
+            BufferedInputStream bis = null;
+            OutputStream os = null;
+            try {
+                os = res.getOutputStream();
+                bis = new BufferedInputStream(new FileInputStream(excelFile));
+                int i = bis.read(buff);
+                while (i != -1) {
+                    os.write(buff, 0, buff.length);
+                    os.flush();
+                    i = bis.read(buff);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                excelFile.delete();
+            }
+        }
+    }
+
 }
 
 
