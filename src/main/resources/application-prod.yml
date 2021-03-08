@@ -1,0 +1,12 @@
+#多环境配置文件必须以application-{profile}.properties的格式命
+server:
+  port: 8089
+
+application.hello: prod-hello liminchuan5
+
+name: prod-liminchuan4
+age: 25
+
+user:
+  bigName: prod-liminchuan2
+  age: 26

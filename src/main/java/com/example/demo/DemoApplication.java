@@ -12,6 +12,9 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 //@Configuration  //相当于把标注的类作为配置文件
 //@EnableAutoConfiguration  //自动配置，帮助SpringBoot应用将所有符合条件的@Configuration配置都加载到当前SpringBoot，并创建对应配置类的Bean，并把该Bean实体交给IoC容器进行管理。
 //@ComponentScan  //定义扫描的路径从中找出标识了需要装配的类自动装配到spring的bean容器中
+
+//@ImportResource({"classpath:some-application.xml"})  //引入xml文件
+
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
